@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4k1lf8vcof2y"]
+
+[ext_resource type="Script" uid="uid://dh4gmyvqnp31m" path="res://Scripts/Player/player.gd" id="1_s0eop"]
+[ext_resource type="PackedScene" uid="uid://bv4jt0x42luom" path="res://Scenes/Entity-Component/DamageComponent.tscn" id="2_h54ih"]
+[ext_resource type="PackedScene" uid="uid://b3w8c8rj6xk31" path="res://Scenes/Player/HealthContainers/HealthContainer.tscn" id="2_ude3g"]
+[ext_resource type="PackedScene" uid="uid://br8wph2pynlw7" path="res://Scenes/Entity-Component/HealthComponent.tscn" id="3_ude3g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s0eop"]
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("damage_component", "health_component", "health_container")]
+script = ExtResource("1_s0eop")
+damage_component = NodePath("DamageComponent")
+health_component = NodePath("HealthComponent")
+health_container = NodePath("HealthContainer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="HealthContainer" parent="." instance=ExtResource("2_ude3g")]
+
+[node name="DamageComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("2_h54ih")]
+entity = NodePath("..")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_ude3g")]
+entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_s0eop")
+debug_color = Color(0.246537, 0.0145583, 0.312419, 0.42)
+
+[connection signal="on_death" from="HealthComponent" to="." method="_game_over"]

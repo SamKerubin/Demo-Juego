@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbegy4t0imrbk"]
+
+[ext_resource type="Script" uid="uid://55kc40m7tpyd" path="res://Scripts/Player/HealthContainers/health.gd" id="1_tr0s1"]
+
+[node name="Health" type="CanvasLayer"]
+script = ExtResource("1_tr0s1")

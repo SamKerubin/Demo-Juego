@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3w8c8rj6xk31"]
+
+[ext_resource type="Script" uid="uid://0khg4pfqcmoa" path="res://Scripts/Player/HealthContainers/health_container.gd" id="1_ea370"]
+
+[node name="HealthContainer" type="CanvasLayer"]
+script = ExtResource("1_ea370")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 28.0
+offset_top = 21.0
+offset_right = 286.0
+offset_bottom = 117.0
+columns = 6

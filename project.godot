@@ -13,3 +13,29 @@ config_version=5
 config/name="Demo-Juego"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+PlayerStats="*res://Singletons/PlayerStats.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+gdscript/warnings/inferred_declaration=2
+
+[file_customization]
+
+folder_colors={
+"res://Assets/": "green",
+"res://Resources/": "purple",
+"res://Scenes/": "yellow",
+"res://Scripts/": "red",
+"res://Singletons/": "orange"
+}
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemy"
+2d_physics/layer_3="Collectable"
+2d_physics/layer_4="MapObject"

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bv4jt0x42luom"]
+
+[ext_resource type="Script" uid="uid://bwejdj0jv0gxm" path="res://Scripts/Entity-Component/damage_component.gd" id="1_1lk6x"]
+[ext_resource type="PackedScene" uid="uid://cp53a180vl7v7" path="res://Scenes/Entity-Component/AreaComponent.tscn" id="2_fb2d3"]
+
+[node name="DamageComponent" type="Area2D"]
+collision_mask = 10
+script = ExtResource("1_1lk6x")
+
+[node name="AreaComponent" parent="." instance=ExtResource("2_fb2d3")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_entity_entered"]
