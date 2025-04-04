@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=2 format=3 uid="uid://ble0ijnbj40lx"]
+
+[ext_resource type="Script" uid="uid://deqjelm6jogpn" path="res://Scripts/Player/PlayerStats.gd" id="1_kmofy"]
+
+[resource]
+script = ExtResource("1_kmofy")
+health_container = 3
+health = 6.0
+damage = 3.4
+speed = 1.0
+luck = 0.0
+metadata/_custom_type_script = "uid://deqjelm6jogpn"

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dh4gmyvqnp31m" path="res://Scripts/Player/player.gd" id="1_s0eop"]
 [ext_resource type="PackedScene" uid="uid://bv4jt0x42luom" path="res://Scenes/Entity-Component/DamageComponent.tscn" id="2_h54ih"]
-[ext_resource type="Resource" uid="uid://ble0ijnbj40lx" path="res://Resources/Player/player_stats.tres" id="2_jmcll"]
+[ext_resource type="Resource" uid="uid://ble0ijnbj40lx" path="res://Resources/player_stats.tres" id="2_jmcll"]
 [ext_resource type="PackedScene" uid="uid://b3w8c8rj6xk31" path="res://Scenes/Player/HealthContainers/HealthContainer.tscn" id="2_ude3g"]
 [ext_resource type="PackedScene" uid="uid://br8wph2pynlw7" path="res://Scenes/Entity-Component/HealthComponent.tscn" id="3_ude3g"]
 
@@ -21,7 +21,6 @@ health_container = NodePath("HealthContainer")
 player = NodePath("..")
 
 [node name="DamageComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("2_h54ih")]
-position = Vector2(-22, 0)
 entity = NodePath("..")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_ude3g")]

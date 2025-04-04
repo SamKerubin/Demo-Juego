@@ -11,15 +11,17 @@ config_version=5
 [application]
 
 config/name="Demo-Juego"
+run/main_scene="uid://bqv673hff16uy"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-PlayerStats="*res://Singletons/PlayerStats.gd"
+SceneLoader="*res://Singletons/SceneLoader.gd"
 
 [debug]
 
+gdscript/warnings/shadowed_global_identifier=0
 gdscript/warnings/untyped_declaration=2
 gdscript/warnings/inferred_declaration=2
 

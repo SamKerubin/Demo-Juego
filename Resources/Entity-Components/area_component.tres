@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AreaComponent" load_steps=2 format=3 uid="uid://d0dlqxcgamxek"]
+
+[ext_resource type="Script" uid="uid://ct1b330pboi8h" path="res://Scripts/Entity-Component/area_component.gd" id="1_c26rq"]
+
+[resource]
+script = ExtResource("1_c26rq")
+type = 0
+size = Vector2(22, 22)
+metadata/_custom_type_script = "uid://ct1b330pboi8h"
