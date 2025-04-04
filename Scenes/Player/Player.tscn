@@ -15,7 +15,8 @@ health_container = NodePath("HealthContainer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="HealthContainer" parent="." instance=ExtResource("2_ude3g")]
+[node name="HealthContainer" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_ude3g")]
+player = NodePath("..")
 
 [node name="DamageComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("2_h54ih")]
 entity = NodePath("..")

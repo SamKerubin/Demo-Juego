@@ -5,11 +5,14 @@ const HEALTH: PackedScene = preload("res://Scenes/Player/HealthContainers/Health
 const HALF_HEALTH: PackedScene = preload("res://Scenes/Player/HealthContainers/HalfHealth.tscn")
 const EMPTY_HEALTH: PackedScene = preload("res://Scenes/Player/HealthContainers/EmptyHealth.tscn")
 
+@export var player: Player
+
 @onready var health_container: GridContainer = $GridContainer
 
 func _ready() -> void:
 	_update_health()
 	PlayerStats.re_asign_stats.connect(_update_health)
+	player.damage_component.do_damage.connect(_update_health)
 
 func _update_health() -> void:
 	var temp_health: float = PlayerStats.health
@@ -24,6 +27,8 @@ func _update_health() -> void:
 			health = HALF_HEALTH.instantiate()
 		else:
 			health = HEALTH.instantiate()
-
+		
+		health_container.add_child(health)
+		
 		containers += 1
 		temp_health -= 1
