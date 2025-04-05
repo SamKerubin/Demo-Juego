@@ -21,8 +21,8 @@ const MIN_SPEED: float = 0.1
 const MAX_LUCK: float = 2_147_483_647
 const MIN_LUCK: float = -2_147_483_648
 
-@export var health_container: int = 12
-@export var health: float = 6
+@export var health_container: int = 3
+@export var health: float = 3
 @export var damage: float = 3.4
 @export var dmg_multiplier: float = 1
 @export var speed: float = 1
@@ -36,14 +36,12 @@ func _modify_stats_permanent(new_stats: Dictionary[String, float]) -> void:
 	var speed: float = new_stats.get("speed", 0)
 	var luck: float = new_stats.get("luck", 0)
 	
-	self.health_container += health_container if health_container < MAX_HEALTH_CONTAINERS \
-											or health_container > MIN_HEALTH_CONTAINERS else 0
-	self.health += health if health < MAX_HEALTH or health > MIN_HEALTH else 0
-	self.damage += damage if damage < MAX_DAMAGE or damage > MIN_DAMAGE else 0
-	self.dmg_multiplier += dmg_multiplier if dmg_multiplier < MAX_DMG_MULIPLIER \
-										or dmg_multiplier > MIN_DMG_MULIPLIER else 0
-	self.speed += speed if speed < MAX_SPEED or speed > MIN_SPEED else 0
-	self.luck += luck if luck < MAX_LUCK or luck > MIN_LUCK else 0
+	self.health_container = clamp(self.health_container + health_container, MIN_HEALTH_CONTAINERS, MAX_HEALTH_CONTAINERS)
+	self.health = clamp(self.health + health, MIN_HEALTH, MAX_HEALTH)
+	self.damage = clamp(self.damage + damage, MIN_DAMAGE, MAX_DAMAGE) 
+	self.dmg_multiplier = clamp(self.dmg_multiplier + dmg_multiplier, MIN_DMG_MULIPLIER, MAX_DMG_MULIPLIER)
+	self.speed = clamp(self.speed + speed, MIN_SPEED, MAX_SPEED)
+	self.luck = clamp(self.luck + luck, MIN_LUCK, MAX_LUCK) 
 	
 	re_asign_stats.emit()
 

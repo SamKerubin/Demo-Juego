@@ -2,7 +2,7 @@ extends Area2D
 class_name HealthComponent
 
 signal on_death
-signal on_damage
+signal on_damage(damage: float)
 
 @export var area: AreaComponent = load("res://Resources/Entity-Components/area_component.tres")
 
@@ -22,10 +22,8 @@ func _ready() -> void:
 
 func _on_damage_recieved(damage: float) -> void: 
 	if is_alive:
-		health -= damage
-
-		on_damage.emit()
-
+		on_damage.emit(damage)
+		
 		if health <= 0:
 			is_alive = false
 

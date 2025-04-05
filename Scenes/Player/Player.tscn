@@ -1,40 +1,157 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4k1lf8vcof2y"]
+[gd_scene load_steps=16 format=3 uid="uid://d4k1lf8vcof2y"]
 
 [ext_resource type="Script" uid="uid://dh4gmyvqnp31m" path="res://Scripts/Player/player.gd" id="1_s0eop"]
 [ext_resource type="PackedScene" uid="uid://bv4jt0x42luom" path="res://Scenes/Entity-Component/DamageComponent.tscn" id="2_h54ih"]
-[ext_resource type="Resource" uid="uid://ble0ijnbj40lx" path="res://Resources/Player/player_stats.tres" id="2_jmcll"]
+[ext_resource type="Resource" uid="uid://bouxxd3tekpw2" path="res://Resources/Player/player_stats.tres" id="2_jmcll"]
 [ext_resource type="PackedScene" uid="uid://b3w8c8rj6xk31" path="res://Scenes/Player/HealthContainers/HealthContainer.tscn" id="2_ude3g"]
+[ext_resource type="Texture2D" uid="uid://ddbf54qmrqjs8" path="res://Assets/Player/Player_Sprite.png" id="3_fk5o5"]
 [ext_resource type="PackedScene" uid="uid://br8wph2pynlw7" path="res://Scenes/Entity-Component/HealthComponent.tscn" id="3_ude3g"]
-[ext_resource type="Resource" uid="uid://d0dlqxcgamxek" path="res://Resources/Entity-Components/area_component.tres" id="5_4wape"]
+[ext_resource type="Script" uid="uid://ct1b330pboi8h" path="res://Scripts/Entity-Component/area_component.gd" id="6_fk5o5"]
+[ext_resource type="PackedScene" uid="uid://b11bslveifvoj" path="res://Scenes/Entity-Component/MovementComponent.tscn" id="7_t26db"]
+
+[sub_resource type="Animation" id="Animation_t26db"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:hitted")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:attacked")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageComponent:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4wape"]
+resource_name = "Up_Damage_Animation"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:hitted")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_fk5o5"]
+resource_name = "Attack_Done"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:attacked")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageComponent:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fk5o5"]
+_data = {
+&"RESET": SubResource("Animation_t26db"),
+&"attack_done": SubResource("Animation_4wape"),
+&"up_damage_animation": SubResource("Animation_fk5o5")
+}
+
+[sub_resource type="Resource" id="Resource_825xp"]
+script = ExtResource("6_fk5o5")
+type = "Capsule"
+size = Vector2(22, 10)
+metadata/_custom_type_script = "uid://ct1b330pboi8h"
+
+[sub_resource type="Resource" id="Resource_ji083"]
+script = ExtResource("6_fk5o5")
+type = "Capsule"
+size = Vector2(10, 22)
+metadata/_custom_type_script = "uid://ct1b330pboi8h"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s0eop"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("damage_component", "health_component", "health_container")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("damage_component", "health_component", "movement_component", "health_container")]
 script = ExtResource("1_s0eop")
 stats = ExtResource("2_jmcll")
 damage_component = NodePath("DamageComponent")
 health_component = NodePath("HealthComponent")
+movement_component = NodePath("MovementComponent")
 health_container = NodePath("HealthContainer")
+attacked = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_fk5o5")
 
 [node name="HealthContainer" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_ude3g")]
 player = NodePath("..")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fk5o5")
+}
+
 [node name="DamageComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("2_h54ih")]
 position = Vector2(-22, 0)
-area = ExtResource("5_4wape")
+monitoring = false
+area = SubResource("Resource_825xp")
 entity = NodePath("..")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_ude3g")]
-area = ExtResource("5_4wape")
+monitoring = false
+area = SubResource("Resource_ji083")
+entity = NodePath("..")
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("7_t26db")]
 entity = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_s0eop")
 debug_color = Color(0.246537, 0.0145583, 0.312419, 0.42)
 
+[connection signal="do_damage" from="DamageComponent" to="." method="_on_damage_done"]
 [connection signal="on_damage" from="HealthComponent" to="." method="_on_damage_recieved"]
 [connection signal="on_death" from="HealthComponent" to="." method="_game_over"]

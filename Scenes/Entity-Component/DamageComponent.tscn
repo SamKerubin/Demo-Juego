@@ -1,15 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bv4jt0x42luom"]
+[gd_scene load_steps=2 format=3 uid="uid://bv4jt0x42luom"]
 
 [ext_resource type="Script" uid="uid://bwejdj0jv0gxm" path="res://Scripts/Entity-Component/damage_component.gd" id="1_1lk6x"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fb2d3"]
 
 [node name="DamageComponent" type="Area2D"]
 collision_mask = 10
 script = ExtResource("1_1lk6x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_fb2d3")
 debug_color = Color(0, 0.437668, 0.285454, 0.42)
 
 [connection signal="body_entered" from="." to="." method="_on_entity_entered"]

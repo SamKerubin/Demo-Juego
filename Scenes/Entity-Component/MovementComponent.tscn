@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b11bslveifvoj"]
+
+[ext_resource type="Script" uid="uid://cy1r5qc4p5jtk" path="res://Scripts/Entity-Component/movement_component.gd" id="1_rftc3"]
+
+[node name="MovementComponent" type="Node"]
+script = ExtResource("1_rftc3")
