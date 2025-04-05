@@ -16,22 +16,25 @@ func _ready() -> void:
 	player.health_component.on_damage.connect(_update_health)
 
 func _update_health() -> void:
-	var temp_health: float = player.stats.health
-
-	var containers: int = 1
-
-	while containers <= player.stats.health_container: 
-
-		var health: Variant
+	_clear_children()
+	
+	var health: float = player.stats.health
+	var max_health: int = player.stats.health_container
+	
+	for c: int in range(max_health): 
+		var heart: Variant
 		
-		if temp_health == 0:
-			health = EMPTY_HEALTH.instantiate()
-		if temp_health == 0.5:
-			health = HALF_HEALTH.instantiate()
+		if health >= 1:
+			heart = HEALTH.instantiate()
+		elif health > 0:
+			heart = HALF_HEALTH.instantiate()
 		else:
-			health = HEALTH.instantiate()
+			heart = EMPTY_HEALTH.instantiate()
+			
+		health_container.add_child(heart)
+		
+		health -= 1
 
-		health_container.add_child(health)
-
-		containers += 1
-		temp_health -= 1
+func _clear_children() -> void:
+	for child: Control in health_container.get_children():
+		child.queue_free()

@@ -1,23 +1,23 @@
 extends Resource
 class_name AreaComponent
 
-enum CollisionType {
-	Capsule, Rectangle, Circle
-}
-
 @export_category("Collision Stats")
-@export var type: CollisionType = CollisionType.Capsule
+@export_enum("Capsule", "Rectangle", "Circle") var type: String = "Capsule"
 @export var size: Vector2 = Vector2(22, 22)
 
 func get_shape() -> Shape2D:
 	match type:
-		CollisionType.Capsule:
-			return CapsuleShape2D.new()
-		CollisionType.Rectangle:
-			return RectangleShape2D.new()
-		CollisionType.Circle:
-			return CircleShape2D.new()
-		_:
-			return null
-func is_capsule_or_circle() -> bool:
-	return type == CollisionType.Capsule or type == CollisionType.Circle
+		"Capsule": return CapsuleShape2D.new()
+		"Rectangle": return RectangleShape2D.new()
+		"Circle": return CircleShape2D.new()
+		_: return null
+
+func set_size(shape: Shape2D) -> void:
+	if shape == CapsuleShape2D:
+		shape.radius = size.x
+		shape.height = size.y
+		return
+	if shape == RectangleShape2D:
+		shape.size = size
+		return
+	shape.radius = size.x

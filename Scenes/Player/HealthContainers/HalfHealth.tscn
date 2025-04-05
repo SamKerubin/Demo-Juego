@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cembkcora6xhq"]
+[gd_scene format=3 uid="uid://cembkcora6xhq"]
 
-[ext_resource type="Script" uid="uid://dx2u50enlbrrf" path="res://Scripts/Player/HealthContainers/half_health.gd" id="1_inhf1"]
+[node name="HalfHealth" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 
-[node name="HalfHealth" type="CanvasLayer"]
-script = ExtResource("1_inhf1")
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.333333, 0, 0, 1)

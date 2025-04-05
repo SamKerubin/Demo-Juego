@@ -1,11 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://br8wph2pynlw7"]
+[gd_scene load_steps=2 format=3 uid="uid://br8wph2pynlw7"]
 
 [ext_resource type="Script" uid="uid://x0rk4ec4kawr" path="res://Scripts/Entity-Component/health_component.gd" id="1_rbt5o"]
-[ext_resource type="Resource" uid="uid://d0dlqxcgamxek" path="res://Resources/Entity-Components/area_component.tres" id="2_84siw"]
 
 [node name="HealthComponent" type="Area2D"]
 script = ExtResource("1_rbt5o")
-area_component = ExtResource("2_84siw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 debug_color = Color(6.78644e-06, 0.161528, 0.49109, 0.42)

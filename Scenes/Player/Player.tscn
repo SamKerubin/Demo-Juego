@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://d4k1lf8vcof2y"]
+[gd_scene load_steps=8 format=3 uid="uid://d4k1lf8vcof2y"]
 
 [ext_resource type="Script" uid="uid://dh4gmyvqnp31m" path="res://Scripts/Player/player.gd" id="1_s0eop"]
 [ext_resource type="PackedScene" uid="uid://bv4jt0x42luom" path="res://Scenes/Entity-Component/DamageComponent.tscn" id="2_h54ih"]
 [ext_resource type="Resource" uid="uid://ble0ijnbj40lx" path="res://Resources/Player/player_stats.tres" id="2_jmcll"]
 [ext_resource type="PackedScene" uid="uid://b3w8c8rj6xk31" path="res://Scenes/Player/HealthContainers/HealthContainer.tscn" id="2_ude3g"]
 [ext_resource type="PackedScene" uid="uid://br8wph2pynlw7" path="res://Scenes/Entity-Component/HealthComponent.tscn" id="3_ude3g"]
+[ext_resource type="Resource" uid="uid://d0dlqxcgamxek" path="res://Resources/Entity-Components/area_component.tres" id="5_4wape"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s0eop"]
 
@@ -15,6 +16,8 @@ damage_component = NodePath("DamageComponent")
 health_component = NodePath("HealthComponent")
 health_container = NodePath("HealthContainer")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="HealthContainer" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_ude3g")]
@@ -22,9 +25,11 @@ player = NodePath("..")
 
 [node name="DamageComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("2_h54ih")]
 position = Vector2(-22, 0)
+area = ExtResource("5_4wape")
 entity = NodePath("..")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_ude3g")]
+area = ExtResource("5_4wape")
 entity = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
